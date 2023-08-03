@@ -2,16 +2,16 @@
 # please run with sudo
 
 # init
-sudo apt-get update
-sudo apt-get upgrage
+sudo apt-get update -y
+sudo apt-get upgrage -y
 mkdir install-temp
 cd install-temp
 
 # install make and gcc, g++
 echo "install make and gcc ..."
-apt-get install make
-apt-get install gcc
-apt-get install g++
+apt-get install make --y
+apt-get install gcc -y
+apt-get install g++ -y
 
 # install docker, config docker
 echo "install docker ..."
@@ -22,24 +22,12 @@ echo '{"registry-mirrors":["https://reg-mirror.qiniu.com"]}' > /etc/daemon.json
 
 # install go
 echo "install golang ..."
-curl https://golang.google.cn/dl/go1.20.6.linux-amd64.tar.gz
+wget https://golang.google.cn/dl/go1.20.6.linux-amd64.tar.gz
 tar -zxvf go1.20.6.linux-amd64.tar.gz
 mv go /opt/
-go env -w GOPROXY=https://goproxy.io,direct
 mkdir -p $HOME/go/bin
 echo 'export PATH=/opt/go/bin:'$HOME'/go/bin:$PATH' >> $HOME/.bashrc
-
-# install python
-echo "install python ..."
-
-# install rust
-echo "install rust ..."
-
-# install java
-echo "install java ..."
-
-# install node
-echo "install node ..."
+go env -w GOPROXY=https://goproxy.io,direct
 
 # install mysql cli
 echo "install mysql cli ..."
@@ -65,10 +53,16 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 chmod +x kubectl
 mv kubectl /usr/local/bin
 
+# install other tools for ubuntu
+echo "install tools for ubuntu ..."
+apt install vim -y
+apt install gnome-tweaks -y
+apt install compizconfig-settings-manager -y
+
 # uninstall some useless software in ubuntu
 echo "uninstall useless software ..."
-apt-get remove libreoffice-common
-apt-get remove thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-sudoku
+apt-get remove -y libreoffice-common
+apt-get remove -y thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-sudoku
 
 # clean
 echo "clean ..."
@@ -76,4 +70,3 @@ cd ..
 rm -rf ./install-temp
 
 echo "done ..."
-echo "make other configuration by your own!"
