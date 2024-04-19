@@ -64,6 +64,9 @@ echo "uninstall useless software ..."
 apt-get remove -y libreoffice-common
 apt-get remove -y thunderbird totem rhythmbox simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-sudoku
 
+# some setting
+gsettings set org.gnome.mutter center-new-windows true
+
 # clean
 echo "clean ..."
 cd ..
